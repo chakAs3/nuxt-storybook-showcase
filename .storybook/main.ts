@@ -1,4 +1,5 @@
 /** @type { import('storybook-vue').StorybookConfig } */
+import { mergeConfig } from "vite"
 const config = {
   stories: [
     '../components/**/*.mdx',
@@ -17,5 +18,12 @@ const config = {
   docs: {
     autodocs: 'tag',
   },
+  async viteFinal(config) {
+    return mergeConfig(config, {
+     optimizeDeps: {
+       include: ['jsdoc-type-pratt-parser'],
+     }
+   }); 
+  }
 }
 export default config
